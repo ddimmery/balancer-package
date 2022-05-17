@@ -14,8 +14,8 @@ class BWD(object):
     $q$ is the desired marginal probability, $\\phi$ is the parameter which controls robustness and
     $\\alpha$ is the normalizing constant which ensures the probability is well-formed.
 
-    !!! important ""
-        If $|x \\cdot w| > \\alpha$, then a restart is performed by resetting the algorithm:
+    !!! important "If $|x \\cdot w| > \\alpha$"
+        A restart is performed by resetting the algorithm:
         
         - $w$ is reset to the zero vector
         - $\\alpha$ is reset to a constant based on the number of units remaining in the sample
@@ -26,15 +26,13 @@ class BWD(object):
         Args:
             N: total number of points
             D: dimension of the data
-            delta: probability of success
+            delta: probability of failure
             q: Target marginal probability of treatment
             intercept: Whether an intercept term be added to covariate profiles
             phi: Robustness parameter. A value of 1 focuses entirely on balance, while a value
                 approaching zero does pure randomization.
         """
         self.q = q
-        # use the constant from corrollary 2 in Appendix L
-        # self.alpha = np.log(4 * N * D / delta)
         self.intercept = intercept
         self.delta = delta
         self.N = N

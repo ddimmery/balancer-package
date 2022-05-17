@@ -28,7 +28,7 @@ class MultiBWD(object):
         Args:
             N: total number of points
             D: dimension of the data
-            delta: probability of success
+            delta: probability of failure
             q: Target marginal probability of treatment
             intercept: Whether an intercept term be added to covariate profiles
             phi: Robustness parameter. A value of 1 focuses entirely on balance, while a value

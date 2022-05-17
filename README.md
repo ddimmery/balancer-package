@@ -25,7 +25,7 @@ conda install -c conda-forge balancer
 
 ## Usage
 
-Eventually this will contain code examples and a simple demonstration of the method, like the following:
+A simple example of how to use [BWD](https://ddimmery.github.io/balancer-package/reference/balancer/bwd/) to balance a stream of covariate data follows:
 
 
 ```python
@@ -91,10 +91,10 @@ sns.relplot(
 It's clear from the above chart that using BWD keeps imbalance substantially more under control than standard methods of randomization.
 
 ## Citation
-#### APA:
+#### APA
 > Arbour, D., Dimmery, D., Mai, T., & Rao, A. (2022). *Online Balanced Experimental Design*. arXiv preprint arXiv:2203.02025.
 
-#### BibTeX:
+#### BibTeX
 ```
 @misc{https://doi.org/10.48550/arxiv.2203.02025,
   doi = {10.48550/ARXIV.2203.02025},

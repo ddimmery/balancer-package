@@ -14,8 +14,8 @@ class BWDRandom(object):
     $q$ is the desired marginal probability, $\\phi$ is the parameter which controls robustness and
     $\\alpha$ is the normalizing constant which ensures the probability is well-formed.
 
-    !!! important ""
-        If $|x \\cdot w| > \\alpha$, then all future units will be assigned by complete randomization.
+    !!! important "If $|x \\cdot w| > \\alpha$"
+        All future units will be assigned by complete randomization.
     """
     def __init__(
         self, N: int, D: int, delta: float=0.05, q: float=0.5, intercept: bool=True, phi: float=1
@@ -25,15 +25,13 @@ class BWDRandom(object):
         Arguments:
             N: total number of points
             D: dimension of the data
-            delta: probability of success
+            delta: probability of failure
             q: Target marginal probability of treatment
             intercept: Whether an intercept term be added to covariate profiles
             phi: Robustness parameter. A value of 1 focuses entirely on balance, while a value
                 approaching zero does pure randomization.
         """
         self.q = q
-        # use the constant from corrollary 2 in Appendix L
-        # self.alpha = np.log(4 * N * D / delta)
         self.intercept = intercept
         self.delta = delta
         self.N = N
