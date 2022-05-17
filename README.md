@@ -1,8 +1,11 @@
 # Balancing Walk Design
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+[![deploy](https://github.com/ddimmery/balancer-package/actions/workflows/ci.yml/badge.svg)](https://github.com/ddimmery/balancer-package/actions/workflows/ci.yml)
 
-This package provides a reference implementation of the [Balancing Walk Design](https://arxiv.org/abs/2203.02025). It relies on minimal dependences
+This package provides a reference implementation of the [Balancing Walk Design](https://arxiv.org/abs/2203.02025). It relies on minimal dependencies and is intended to be an easy way to plug in advanced experimental designs into existing systems with little overhead.
+
+More details on the design of the method on the [About page](about) and in the [paper](https://arxiv.org/abs/2203.02025). An [example of usage is below](#usage).
 
 ## Installation
 
@@ -29,7 +32,7 @@ Eventually this will contain code examples and a simple demonstration of the met
 from balancer import BWD
 from numpy.random import default_rng
 import numpy as np
-rng = default_rng()
+rng = default_rng(2022)
 
 n = 10000
 d = 5
@@ -75,8 +78,7 @@ norm_rand = np.linalg.norm(imbalance_rand, axis = 1).tolist()
 sns.relplot(
     x=list(range(n + 1)) * 2, y=norm_bwd + norm_rand,
     hue = ["BWD"] * (n + 1) + ["Random"] * (n + 1),
-    kind="line", #legend = "brief",
-    height=5, aspect=1.5,
+    kind="line", height=5, aspect=2,
 ).set_axis_labels("Iteration", "Imbalance");
 ```
 
@@ -85,6 +87,8 @@ sns.relplot(
 ![png](README_files/README_3_0.png)
     
 
+
+It's clear from the above chart that using BWD keeps imbalance substantially more under control than standard methods of randomization.
 
 ## Citation
 APA:
