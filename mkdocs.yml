@@ -1,0 +1,86 @@
+site_name: Online Balancing Design
+site_url: https://ddimmery.github.io/balancer-package
+repo_url: "https://github.com/ddimmery/balancer-package"
+repo_name: "balancer"
+nav:
+  - Home: index.md
+  - About: about.md
+  - API Reference: reference/
+  - Development:
+    - Contributing: contributing.md
+    - Code of Conduct: code_of_conduct.md
+    - Coverage report: coverage.md
+extra:
+  analytics:
+    provider: google
+    property: G-493JCPK2WD
+
+theme:
+  name: "material"
+  hide:
+    - navigation
+  font:
+    text: Fira Sans
+    code: Fira Code
+  icon:
+    logo: material/beaker-outline
+    repo: fontawesome/brands/github
+  favicon: material/beaker-outline
+  features:
+  - content.code.annotate
+  - navigation.tabs
+  palette:
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: blue grey
+    accent: indigo
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - meta
+  - attr_list
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
+
+plugins:
+- coverage:
+    page_name: coverage  # default
+    html_report_dir: htmlcov  # default
+- search
+- gen-files:
+    scripts:
+    - docs/gen_ref_pages.py
+- literate-nav:
+    nav_file: SUMMARY.md
+- section-index
+- autorefs
+- mkdocstrings:
+    watch:
+      - src/balancer
+    handlers: 
+      python:
+        setup_commands:
+          - import sys
+          - sys.path.append("src")
+        import:
+        - https://docs.python.org/3/objects.inv
+        - https://numpy.org/doc/stable/objects.inv
+        options:
+          docstring_style: google
+          docstring_options:
+            ignore_init_summary: yes
+          merge_init_into_class: yes
+        rendering:
+          show_submodules: no
