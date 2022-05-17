@@ -5,7 +5,7 @@
 
 This package provides a reference implementation of the [Balancing Walk Design](https://arxiv.org/abs/2203.02025). It relies on minimal dependencies and is intended to be an easy way to plug in advanced experimental designs into existing systems with little overhead.
 
-More details on the design of the method on the [About page](about) and in the [paper](https://arxiv.org/abs/2203.02025). An [example of usage is below](#usage).
+More details on the design of the method on the [About page](https://ddimmery.github.io/balancer-package/about/) and in the [paper](https://arxiv.org/abs/2203.02025). An [example of usage is below](#usage).
 
 ## Installation
 
@@ -91,10 +91,10 @@ sns.relplot(
 It's clear from the above chart that using BWD keeps imbalance substantially more under control than standard methods of randomization.
 
 ## Citation
-APA:
+#### APA:
 > Arbour, D., Dimmery, D., Mai, T., & Rao, A. (2022). *Online Balanced Experimental Design*. arXiv preprint arXiv:2203.02025.
 
-BibTeX:
+#### BibTeX:
 ```
 @misc{https://doi.org/10.48550/arxiv.2203.02025,
   doi = {10.48550/ARXIV.2203.02025},
