@@ -11,5 +11,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
-      - run: python -m pip install .
-      - run: mkdocs gh-deploy --force
+      - run: |
+        python -m pip install poetry
+        poetry install
+      - run: PYTHONPATH=src poetry run mkdocs gh-deploy --force
