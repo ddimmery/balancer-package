@@ -19,4 +19,4 @@ coverage:
 	PYTHONPATH=src poetry run coverage run --source=bwd -m pytest tests && poetry run coverage report -m && poetry run coverage html
 
 build_readme: README.ipynb
-	PYTHONPATH=src poetry run jupyter nbconvert --to markdown --execute README.ipynb && rm -rf docs/README_files/ && mv README_files docs/
+	PYTHONPATH=src poetry run jupyter nbconvert --to markdown --execute README.ipynb && rm -rf docs/README_files/ && mv README_files docs/ && pandoc --from=markdown --to=rst --output=README README.md

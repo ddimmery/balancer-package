@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from balancer import BWD
+from bwd import BWD
 from numpy.random import default_rng
 
 rng = default_rng(84698384) # ASCII for 'test' in decimal, concatenated

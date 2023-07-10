@@ -3,6 +3,7 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 [![deploy](https://github.com/ddimmery/balancer-package/actions/workflows/ci.yml/badge.svg)](https://github.com/ddimmery/balancer-package/actions/workflows/ci.yml)
 [![DOI](https://zenodo.org/badge/493411416.svg)](https://zenodo.org/badge/latestdoi/493411416)
+![PyPI](https://img.shields.io/pypi/v/bwd)
 
 This package provides a reference implementation of the [Balancing Walk Design](https://arxiv.org/abs/2203.02025). It relies on minimal dependencies and is intended to be an easy way to plug in advanced experimental designs into existing systems with little overhead.
 
@@ -15,12 +16,7 @@ More details on the design of the method on the [About page](https://ddimmery.gi
 With `pip`:
 
 ```
-pip install balancer
-```
-
-With `conda`:
-```
-conda install -c conda-forge balancer
+pip install bwd
 ```
 
 
@@ -30,7 +26,7 @@ A simple example of how to use [BWD](https://ddimmery.github.io/balancer-package
 
 
 ```python
-from balancer import BWD
+from bwd import BWD
 from numpy.random import default_rng
 import numpy as np
 rng = default_rng(2022)
@@ -93,18 +89,24 @@ It's clear from the above chart that using BWD keeps imbalance substantially mor
 
 ## Citation
 #### APA
-> Arbour, D., Dimmery, D., Mai, T., & Rao, A. (2022). *Online Balanced Experimental Design*. arXiv preprint arXiv:2203.02025.
+> Arbour, D., Dimmery, D., Mai, T. & Rao, A.. (2022). Online Balanced Experimental Design. *Proceedings of the 39th International Conference on Machine Learning*, in *Proceedings of Machine Learning Research* 162:844-864 Available from https://proceedings.mlr.press/v162/arbour22a.html.
 
 #### BibTeX
 ```
-@misc{https://doi.org/10.48550/arxiv.2203.02025,
-  doi = {10.48550/ARXIV.2203.02025},
-  url = {https://arxiv.org/abs/2203.02025},
-  author = {Arbour, David and Dimmery, Drew and Mai, Tung and Rao, Anup},
-  keywords = {Methodology (stat.ME), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  title = {Online Balanced Experimental Design},
-  publisher = {arXiv},
-  year = {2022},
-  copyright = {arXiv.org perpetual, non-exclusive license}
+
+@InProceedings{arbour2022online,
+  title = 	 {Online Balanced Experimental Design},
+  author =       {Arbour, David and Dimmery, Drew and Mai, Tung and Rao, Anup},
+  booktitle = 	 {Proceedings of the 39th International Conference on Machine Learning},
+  pages = 	 {844--864},
+  year = 	 {2022},
+  editor = 	 {Chaudhuri, Kamalika and Jegelka, Stefanie and Song, Le and Szepesvari, Csaba and Niu, Gang and Sabato, Sivan},
+  volume = 	 {162},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {17--23 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v162/arbour22a/arbour22a.pdf},
+  url = 	 {https://proceedings.mlr.press/v162/arbour22a.html},
 }
+
 ```
