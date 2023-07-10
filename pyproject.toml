@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "balancer"
+name = "bwd"
 version = "0.1.0"
 description = "A clean implementation of the Balancing Walk Design for online experimental design from Arbour, Dimmery, Mai and Rao (2022)"
 authors = ["Drew Dimmery <drew.dimmery@gmail.com>"]
