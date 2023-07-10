@@ -16,6 +16,11 @@ def test_instantiate():
     global balancer
     balancer = MultiBWD(N = n, D = d)
 
+@pytest.mark.order(1)
+def test_serialize():
+    with pytest.raises(NotImplementedError):
+        balancer.serialize()
+
 def test_instantiate_no_args():
     with pytest.raises(TypeError):
         MultiBWD()

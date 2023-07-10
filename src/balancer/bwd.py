@@ -1,4 +1,8 @@
 import numpy as np
+import json
+
+
+SERIALIZED_ATTRIBUTES = ["N", "D", "delta", "q", "intercept", "phi"]
 
 
 class BWD(object):
@@ -89,3 +93,30 @@ class BWD(object):
         if self.intercept:
             X = np.hstack((X, np.ones((X.shape[0], 1))))
         return np.array([self.assign_next(X[i, :]) for i in range(X.shape[0])])
+
+    def serialize(self):
+        attribs = {}
+        for a in SERIALIZED_ATTRIBUTES:
+            attribs[a] = getattr(self, a)
+        return json.dumps(attribs)
+
+    def to_json(self):
+        return self.serialize()
+
+    @classmethod
+    def deserialize(cls, str):
+        x = json.loads(str)
+        if not isinstance(x, dict):
+            raise ValueError("The deserialized object is not a dictionary.")
+
+        pars = {}
+        state = {}
+        for k in SERIALIZED_ATTRIBUTES:
+            if k in x.keys():
+                pars[k] = x[k]
+            else:
+                state[k] = x[k]
+        obj = cls(**pars)
+        for k, v in state.items():
+            setattr(obj, k, v)
+        return obj

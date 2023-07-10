@@ -111,3 +111,13 @@ class MultiBWD(object):
         if self.intercept:
             X = np.hstack((X, np.ones((X.shape[0], 1))))
         return np.array([self.assign_next(X[i, :]) for i in range(X.shape[0])])
+    
+    def serialize(self):
+        raise NotImplementedError("Serialization is not yet implemented for MultiBWD.")
+
+    def to_json(self):
+        raise NotImplementedError("Serialization is not yet implemented for MultiBWD.")
+
+    @classmethod
+    def deserialize(cls, str):
+        raise NotImplementedError("Serialization is not yet implemented for MultiBWD.")

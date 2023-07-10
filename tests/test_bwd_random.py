@@ -16,6 +16,17 @@ def test_instantiate():
     global balancer
     balancer = BWDRandom(N = n, D = d)
 
+@pytest.mark.order(1)
+def test_serialize():
+    dump = balancer.serialize()
+    assert isinstance(dump, str)
+
+@pytest.mark.order(2)
+def test_deserialize():
+    dump = balancer.serialize()
+    bal = BWDRandom.deserialize(dump)
+    assert isinstance(bal, BWDRandom)
+
 def test_instantiate_no_args():
     with pytest.raises(TypeError):
         BWDRandom()
