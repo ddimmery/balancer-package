@@ -19,6 +19,8 @@ def normalize(to_serialize):
     for k, v in to_serialize.items():
         if isinstance(v, np.ndarray):
             v = v.tolist()
+        if isinstance(v, dict):
+            v = normalize(v)
         result[k] = v
     return result
 

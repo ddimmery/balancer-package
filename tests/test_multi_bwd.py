@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 from bwd import MultiBWD
+from bwd.serialization import serialize, deserialize
 from numpy.random import default_rng
 
 rng = default_rng(84698384) # ASCII for 'test' in decimal, concatenated
@@ -18,8 +19,15 @@ def test_instantiate():
 
 @pytest.mark.order(1)
 def test_serialize():
-    with pytest.raises(NotImplementedError):
-        balancer.serialize()
+    dump = serialize(balancer)
+    assert isinstance(dump, str)
+
+@pytest.mark.order(2)
+def test_deserialize():
+    dump = serialize(balancer)
+    bal = deserialize(dump)
+    assert isinstance(bal, MultiBWD)
+    bal.assign_next(test_x)
 
 def test_instantiate_no_args():
     with pytest.raises(TypeError):

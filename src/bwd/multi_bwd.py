@@ -34,6 +34,12 @@ class MultiBWD(object):
             phi: Robustness parameter. A value of 1 focuses entirely on balance, while a value
                 approaching zero does pure randomization.
         """
+        self.N = N
+        self.D = D
+        self.delta = delta
+        self.intercept = intercept
+        self.phi = phi
+
         if isinstance(q, float):
             q = q if q < 0.5 else 1 - q
             self.qs = [1 - q, q]
@@ -110,12 +116,17 @@ class MultiBWD(object):
         """
         return np.array([self.assign_next(X[i, :]) for i in range(X.shape[0])])
     
-    def serialize(self):
-        raise NotImplementedError("Serialization is not yet implemented for MultiBWD.")
-
-    def to_json(self):
-        raise NotImplementedError("Serialization is not yet implemented for MultiBWD.")
-
-    @classmethod
-    def deserialize(cls, str):
-        raise NotImplementedError("Serialization is not yet implemented for MultiBWD.")
+    @property
+    def definition(self):
+        return {
+            "N": self.N, "D": self.D, "delta": self.delta, "q": self.qs,
+            "intercept": self.intercept, "phi": self.phi
+        }
+    
+    @property
+    def state(self):
+        return {idx: node.state for idx, node in enumerate(self.nodes) if isinstance(node, BWD)}
+    
+    def update_state(self, **node_state_dict):
+        for node, state in node_state_dict.items():
+            self.nodes[int(node)].update_state(**state)
