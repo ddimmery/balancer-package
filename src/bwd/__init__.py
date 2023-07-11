@@ -12,3 +12,4 @@ rather than restarting.
 from .bwd import BWD
 from .bwd_random import BWDRandom
 from .multi_bwd import MultiBWD
+from .online import Online

@@ -27,15 +27,13 @@ def test_instantiate_no_args():
 
 @pytest.mark.order(1)
 def test_assign_one():
-    test_x_with_intercept = np.concatenate([[1], test_x])
-    balancer.assign_next(test_x_with_intercept)
+    balancer.assign_next(test_x)
 
 @pytest.mark.order(5)
 def test_assign_big():
     balancer = MultiBWD(N = n, D = d)
-    test_x_with_intercept = np.concatenate([[1], 100 * test_x])
-    balancer.assign_next(test_x_with_intercept)
-    balancer.assign_next(test_x_with_intercept)
+    balancer.assign_next(test_x)
+    balancer.assign_next(test_x)
 
 @pytest.mark.order(2)
 def test_assign_all():
@@ -49,15 +47,13 @@ def test_instantiate_multi():
 
 @pytest.mark.order(4)
 def test_assign_one_multi():
-    test_x_with_intercept = np.concatenate([[1], test_x])
-    multi_balancer.assign_next(test_x_with_intercept)
+    multi_balancer.assign_next(test_x)
 
 @pytest.mark.order(5)
 def test_assign_big_multi():
     multi_balancer = MultiBWD(N = n, D = d, q = [1/4, 1/4, 1/2])
-    test_x_with_intercept = np.concatenate([[1], 100 * test_x])
-    multi_balancer.assign_next(test_x_with_intercept)
-    multi_balancer.assign_next(test_x_with_intercept)
+    multi_balancer.assign_next(test_x)
+    multi_balancer.assign_next(test_x)
 
 
 

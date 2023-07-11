@@ -1,0 +1,2 @@
+class SampleSizeExpendedError(Exception):
+    pass

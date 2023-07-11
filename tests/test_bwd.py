@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 from bwd import BWD
+from bwd.serialization import serialize, deserialize
 from numpy.random import default_rng
 
 rng = default_rng(84698384) # ASCII for 'test' in decimal, concatenated
@@ -18,14 +19,15 @@ def test_instantiate():
 
 @pytest.mark.order(1)
 def test_serialize():
-    dump = balancer.serialize()
+    dump = serialize(balancer)
     assert isinstance(dump, str)
 
 @pytest.mark.order(2)
 def test_deserialize():
-    dump = balancer.serialize()
-    bal = BWD.deserialize(dump)
+    dump = serialize(balancer)
+    bal = deserialize(dump)
     assert isinstance(bal, BWD)
+    bal.assign_next(test_x)
 
 def test_instantiate_no_args():
     with pytest.raises(TypeError):
@@ -33,15 +35,13 @@ def test_instantiate_no_args():
 
 @pytest.mark.order(1)
 def test_assign_one():
-    test_x_with_intercept = np.concatenate([[1], test_x])
-    balancer.assign_next(test_x_with_intercept)
+    balancer.assign_next(test_x)
 
 @pytest.mark.order(3)
 def test_assign_big():
     balancer = BWD(N = n, D = d)
-    test_x_with_intercept = np.concatenate([[1], 100 * test_x])
-    balancer.assign_next(test_x_with_intercept)
-    balancer.assign_next(test_x_with_intercept)
+    balancer.assign_next(test_x)
+    balancer.assign_next(test_x)
 
 @pytest.mark.order(2)
 def test_assign_all():

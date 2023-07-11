@@ -108,8 +108,6 @@ class MultiBWD(object):
         Args:
             X: array of size n × d of covariate profiles
         """
-        if self.intercept:
-            X = np.hstack((X, np.ones((X.shape[0], 1))))
         return np.array([self.assign_next(X[i, :]) for i in range(X.shape[0])])
     
     def serialize(self):
