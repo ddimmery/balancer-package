@@ -1,9 +1,13 @@
 [tool.poetry]
 name = "bwd"
-version = "0.1.0"
+version = "0.1.2"
 description = "A clean implementation of the Balancing Walk Design for online experimental design from Arbour, Dimmery, Mai and Rao (2022)"
 authors = ["Drew Dimmery <drew.dimmery@gmail.com>"]
 license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://ddimmery.github.io/balancer-package/"
+repository = "https://github.com/ddimmery/balancer-package"
+keywords = ["causal inference", "experimentation", "ab testing"]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
