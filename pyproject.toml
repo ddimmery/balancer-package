@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bwd"
-version = "0.1.3"
+version = "0.1.4"
 description = "A clean implementation of the Balancing Walk Design for online experimental design from Arbour, Dimmery, Mai and Rao (2022)"
 authors = ["Drew Dimmery <drew.dimmery@gmail.com>"]
 license = "Apache-2.0"
