@@ -5,9 +5,9 @@ from .exceptions import SampleSizeExpendedError
 
 class Online(object):
     def __init__(self, cls, **kwargs):
-        N = 1
+        kwargs["N"] = kwargs.get("N", 1)
         self.cls = cls
-        self.balancer = cls(N=N, **kwargs)
+        self.balancer = cls(**kwargs)
     
     def assign_next(self, x: np.ndarray) -> np.ndarray:
         try:
