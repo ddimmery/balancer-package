@@ -48,7 +48,7 @@ increment_imbalance = lambda imba, a, x: np.concatenate([imba, imba[-1:, :] + (2
 
 for x in X:
     # Assign with BWD
-    a_bwd = balancer.assign_next(np.concatenate([[1], x]))
+    a_bwd = balancer.assign_next(x)
     imbalance_bwd = increment_imbalance(imbalance_bwd, a_bwd, x)
     A_bwd.append(a_bwd)
     # Assign with Bernoulli randomization

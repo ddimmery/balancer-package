@@ -10,7 +10,7 @@ repository = "https://github.com/ddimmery/balancer-package"
 keywords = ["causal inference", "experimentation", "ab testing"]
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.11"
+python = ">=3.9,<4.0"
 numpy = "^1.22.3"
 
 [tool.poetry.dev-dependencies]
