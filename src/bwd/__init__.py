@@ -9,6 +9,7 @@ in this package:
 - [`BWDRandom`](bwd_random) - The Balancing Walk Design which reverts to simple randomization
 rather than restarting.
 """
+
 from .bwd import BWD
 from .bwd_random import BWDRandom
 from .multi_bwd import MultiBWD
