@@ -14,18 +14,26 @@ class BWD(object):
     treatment conditional on history will be:
 
     $$p_i = q \\left(1 - \\phi \\frac{x \\cdot w}{\\alpha}\\right)$$
-    
+
     $q$ is the desired marginal probability, $\\phi$ is the parameter which controls robustness and
     $\\alpha$ is the normalizing constant which ensures the probability is well-formed.
 
     !!! important "If $|x \\cdot w| > \\alpha$"
         A restart is performed by resetting the algorithm:
-        
+
         - $w$ is reset to the zero vector
         - $\\alpha$ is reset to a constant based on the number of units remaining in the sample
     """
 
-    def __init__(self, N: int, D: int, delta: float=0.05, q: float=0.5, intercept: bool=True, phi: float=1) -> None:
+    def __init__(
+        self,
+        N: int,
+        D: int,
+        delta: float = 0.05,
+        q: float = 0.5,
+        intercept: bool = True,
+        phi: float = 1,
+    ) -> None:
         """
         Args:
             N: total number of points
@@ -93,19 +101,22 @@ class BWD(object):
             X: array of size n × d of covariate profiles
         """
         return np.array([self.assign_next(X[i, :]) for i in range(X.shape[0])])
-    
+
     @property
     def definition(self):
         return {
-            "N": self.N, "D": self.D, "delta": self.delta, "q": self.q,
-            "intercept": self.intercept, "phi": self.phi
+            "N": self.N,
+            "D": self.D,
+            "delta": self.delta,
+            "q": self.q,
+            "intercept": self.intercept,
+            "phi": self.phi,
         }
-    
+
     @property
     def state(self):
         return {"w_i": self.w_i, "iterations": self.iterations}
-    
+
     def update_state(self, w_i, iterations):
         self.w_i = np.array(w_i)
         self.iterations = iterations
-

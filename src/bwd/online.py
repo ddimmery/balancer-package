@@ -8,7 +8,7 @@ class Online(object):
         kwargs["N"] = kwargs.get("N", 1)
         self.cls = cls
         self.balancer = cls(**kwargs)
-    
+
     def assign_next(self, x: np.ndarray) -> np.ndarray:
         try:
             return self.balancer.assign_next(x)
@@ -19,7 +19,7 @@ class Online(object):
             self.balancer = self.cls(**bal_def)
             self.balancer.update_state(**bal_state)
             return self.balancer.assign_next(x)
-            
+
     def assign_all(self, X: np.ndarray) -> np.ndarray:
         """Assign all points
 
@@ -37,10 +37,10 @@ class Online(object):
     @property
     def definition(self):
         return {"cls": self.cls, **self.balancer.definition}
-    
+
     @property
     def state(self):
         return self.balancer.state
-    
+
     def update_state(self, **kwargs):
         self.balancer.update_state(**kwargs)

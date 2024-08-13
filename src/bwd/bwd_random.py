@@ -21,8 +21,15 @@ class BWDRandom(object):
     !!! important "If $|x \\cdot w| > \\alpha$"
         All future units will be assigned by complete randomization.
     """
+
     def __init__(
-        self, N: int, D: int, delta: float=0.05, q: float=0.5, intercept: bool=True, phi: float=1
+        self,
+        N: int,
+        D: int,
+        delta: float = 0.05,
+        q: float = 0.5,
+        intercept: bool = True,
+        phi: float = 1,
     ) -> None:
         """Initialize the object
 
@@ -96,14 +103,18 @@ class BWDRandom(object):
     @property
     def definition(self):
         return {
-            "N": self.N, "D": self.D, "delta": self.delta, "q": self.q,
-            "intercept": self.intercept, "phi": self.phi
+            "N": self.N,
+            "D": self.D,
+            "delta": self.delta,
+            "q": self.q,
+            "intercept": self.intercept,
+            "phi": self.phi,
         }
-    
+
     @property
     def state(self):
         return {"w_i": self.w_i, "iterations": self.iterations}
-    
+
     def update_state(self, w_i, iterations):
         self.w_i = np.array(w_i)
         self.iterations = iterations

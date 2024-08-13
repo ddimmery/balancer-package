@@ -8,8 +8,10 @@ import numpy as np
 def _left(i):
     return 2 * i + 1
 
+
 def _right(i):
     return 2 * (i + 1)
+
 
 def _parent(i):
     return int(np.floor((i - 1) / 2))
@@ -23,7 +25,16 @@ class MultiBWD(object):
     At each node in the binary tree, it balanced between the treatment groups on the
     left and the right. Thus it ensures balance between any pair of treatment groups.
     """
-    def __init__(self, N: int, D: int, delta: float=0.05, q: Union[float, Iterable]=0.5, intercept: bool=True, phi: float=1.0):
+
+    def __init__(
+        self,
+        N: int,
+        D: int,
+        delta: float = 0.05,
+        q: Union[float, Iterable] = 0.5,
+        intercept: bool = True,
+        phi: float = 1.0,
+    ):
         """
         Args:
             N: total number of points
@@ -50,7 +61,7 @@ class MultiBWD(object):
         num_groups = len(self.qs)
         self.K = num_groups - 1
         self.intercept = intercept
-        
+
         num_levels = int(np.ceil(np.log2(num_groups)))
         num_leaves = int(np.power(2, num_levels))
         extra_leaves = num_leaves - num_groups
@@ -68,13 +79,11 @@ class MultiBWD(object):
                 num_trt = 1
             trt_by_leaf += [trt] * num_trt
             num_leaves_by_trt.append(num_trt)
-        
 
         for leaf, trt in enumerate(trt_by_leaf):
             node = num_nodes - num_leaves + leaf
             self.nodes[node] = trt
             self.weights[node] = 1 / self.qs[trt] / num_leaves_by_trt[trt]
-
 
         for cur_node in range(num_nodes)[::-1]:
             if cur_node == 0:
@@ -89,7 +98,9 @@ class MultiBWD(object):
                 left_weight = self.weights[_left(parent)]
                 right_weight = self.weights[_right(parent)]
                 pr_right = right_weight / (left_weight + right_weight)
-                self.nodes[parent] = BWD(N=N, D=D, intercept=intercept, delta=delta, q=pr_right, phi = phi)
+                self.nodes[parent] = BWD(
+                    N=N, D=D, intercept=intercept, delta=delta, q=pr_right, phi=phi
+                )
                 self.weights[parent] = left_weight + right_weight
 
     def assign_next(self, x: np.ndarray) -> np.ndarray:
@@ -115,18 +126,26 @@ class MultiBWD(object):
             X: array of size n × d of covariate profiles
         """
         return np.array([self.assign_next(X[i, :]) for i in range(X.shape[0])])
-    
+
     @property
     def definition(self):
         return {
-            "N": self.N, "D": self.D, "delta": self.delta, "q": self.qs,
-            "intercept": self.intercept, "phi": self.phi
+            "N": self.N,
+            "D": self.D,
+            "delta": self.delta,
+            "q": self.qs,
+            "intercept": self.intercept,
+            "phi": self.phi,
         }
-    
+
     @property
     def state(self):
-        return {idx: node.state for idx, node in enumerate(self.nodes) if isinstance(node, BWD)}
-    
+        return {
+            idx: node.state
+            for idx, node in enumerate(self.nodes)
+            if isinstance(node, BWD)
+        }
+
     def update_state(self, **node_state_dict):
         for node, state in node_state_dict.items():
             self.nodes[int(node)].update_state(**state)
