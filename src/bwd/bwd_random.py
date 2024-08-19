@@ -1,5 +1,5 @@
 import numpy as np
-import json
+from .exceptions import SampleSizeExpendedError
 
 
 SERIALIZED_ATTRIBUTES = ["N", "D", "delta", "q", "intercept", "phi"]
@@ -47,12 +47,11 @@ class BWDRandom(object):
         self.delta = delta
         self.N = N
         self.D = D + int(self.intercept)
-        self.w_i = np.zeros((self.D,))
+
         self.value_plus = 2 * (1 - self.q)
         self.value_minus = -2 * self.q
         self.phi = phi
-        self.alpha = np.log(2 * self.N / self.delta) * min(1 / self.q, 9.32)
-        self.iterations = 0
+        self.reset()
 
     def set_alpha(self, N: int) -> None:
         """Set normalizing constant for remaining N units
@@ -60,6 +59,8 @@ class BWDRandom(object):
         Args:
             N: Number of units remaining in the sample
         """
+        if N < 0:
+            raise SampleSizeExpendedError()
         self.alpha = -1
 
     def assign_next(self, x: np.ndarray) -> np.ndarray:
@@ -118,3 +119,8 @@ class BWDRandom(object):
     def update_state(self, w_i, iterations):
         self.w_i = np.array(w_i)
         self.iterations = iterations
+
+    def reset(self):
+        self.w_i = np.zeros((self.D,))
+        self.alpha = np.log(2 * self.N / self.delta) * min(1 / self.q, 9.32)
+        self.iterations = 0

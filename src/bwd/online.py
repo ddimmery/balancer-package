@@ -44,3 +44,6 @@ class Online(object):
 
     def update_state(self, **kwargs):
         self.balancer.update_state(**kwargs)
+
+    def reset(self):
+        self.balancer.reset()

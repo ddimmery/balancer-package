@@ -149,3 +149,7 @@ class MultiBWD(object):
     def update_state(self, **node_state_dict):
         for node, state in node_state_dict.items():
             self.nodes[int(node)].update_state(**state)
+
+    def reset(self):
+        for node in self.nodes:
+            node.reset()

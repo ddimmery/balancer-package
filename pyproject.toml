@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bwd"
-version = "0.1.6"
+version = "0.1.7"
 description = "A clean implementation of the Balancing Walk Design for online experimental design from Arbour, Dimmery, Mai and Rao (2022)"
 authors = ["Drew Dimmery <drew.dimmery@gmail.com>"]
 license = "Apache-2.0"
@@ -31,6 +31,9 @@ mkdocs-coverage = "^0.2.5"
 scipy = "^1.8.0"
 seaborn = "^0.11.2"
 pandas = "^1.4.2"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.2.6"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

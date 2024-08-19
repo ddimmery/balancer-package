@@ -10,7 +10,7 @@ in this package:
 rather than restarting.
 """
 
-from .bwd import BWD
-from .bwd_random import BWDRandom
-from .multi_bwd import MultiBWD
-from .online import Online
+from .bwd import BWD as BWD
+from .bwd_random import BWDRandom as BWDRandom
+from .multi_bwd import MultiBWD as MultiBWD
+from .online import Online as Online
