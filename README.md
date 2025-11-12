@@ -67,16 +67,17 @@ We can see how imbalance progresses as a function of time:
 
 ```python
 import seaborn as sns
-import pandas as pd
 
 norm_bwd = np.linalg.norm(imbalance_bwd, axis = 1).tolist()
 norm_rand = np.linalg.norm(imbalance_rand, axis = 1).tolist()
 
-sns.relplot(
+sns.set_theme(style="whitegrid")
+plt = sns.relplot(
     x=list(range(n + 1)) * 2, y=norm_bwd + norm_rand,
     hue = ["BWD"] * (n + 1) + ["Random"] * (n + 1),
     kind="line", height=5, aspect=2,
-).set_axis_labels("Iteration", "Imbalance");
+).set_axis_labels("Iteration", "Imbalance × n");
+plt;
 ```
 
 

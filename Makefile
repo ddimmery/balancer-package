@@ -9,6 +9,9 @@ serve:
 lint:
 	poetry run pylint bwd
 
+typecheck:
+	poetry run basedpyright src/bwd
+
 black:
 	poetry run black .
 

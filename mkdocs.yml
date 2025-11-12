@@ -7,9 +7,9 @@ nav:
   - About: about.md
   - API Reference: reference/
   - Development:
-    - Contributing: contributing.md
-    - Code of Conduct: code_of_conduct.md
-    - Coverage report: coverage.md
+      - Contributing: contributing.md
+      - Code of Conduct: code_of_conduct.md
+      - Coverage report: coverage.md
 extra:
   analytics:
     provider: google
@@ -27,13 +27,13 @@ theme:
     repo: fontawesome/brands/github
   favicon: material/beaker-outline
   features:
-  - content.code.annotate
-  - navigation.tabs
+    - content.code.annotate
+    - navigation.tabs
   palette:
-  - media: "(prefers-color-scheme: light)"
-    scheme: default
-    primary: blue grey
-    accent: indigo
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: indigo
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -55,32 +55,29 @@ markdown_extensions:
       generic: true
 
 plugins:
-- coverage:
-    page_name: coverage  # default
-    html_report_dir: htmlcov  # default
-- search
-- gen-files:
-    scripts:
-    - docs/gen_ref_pages.py
-- literate-nav:
-    nav_file: SUMMARY.md
-- section-index
-- autorefs
-- mkdocstrings:
-    watch:
-      - src/balancer
-    handlers: 
-      python:
-        setup_commands:
-          - import sys
-          - sys.path.append("src")
-        import:
-        - https://docs.python.org/3/objects.inv
-        - https://numpy.org/doc/stable/objects.inv
-        options:
-          docstring_style: google
-          docstring_options:
-            ignore_init_summary: yes
-          merge_init_into_class: yes
-        rendering:
-          show_submodules: no
+  - coverage:
+      page_path: coverage # default
+      html_report_dir: htmlcov # default
+  - search
+  - gen-files:
+      scripts:
+        - docs/gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - section-index
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          inventories:
+            - https://docs.python.org/3/objects.inv
+            - https://numpy.org/doc/stable/objects.inv
+          options:
+            docstring_style: numpy
+            docstring_options:
+              ignore_init_summary: yes
+            merge_init_into_class: yes
+            show_submodules: no
+watch:
+  - src/bwd

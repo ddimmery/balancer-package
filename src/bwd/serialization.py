@@ -1,5 +1,6 @@
-import numpy as np
 import json
+
+import numpy as np
 
 from .bwd import BWD
 from .bwd_random import BWDRandom
@@ -15,6 +16,21 @@ name2class = {
 
 
 def normalize(to_serialize):
+    """Normalize data structures for JSON serialization
+
+    Recursively converts numpy arrays to lists and normalizes nested dictionaries
+    to ensure all data types are JSON-serializable.
+
+    Parameters
+    ----------
+    to_serialize : dict
+        Dictionary containing data to normalize
+
+    Returns
+    -------
+    dict
+        Normalized dictionary with JSON-compatible types
+    """
     result = {}
     for k, v in to_serialize.items():
         if isinstance(v, np.ndarray):
@@ -26,6 +42,21 @@ def normalize(to_serialize):
 
 
 def serialize(obj):
+    """Serialize a balancer object to JSON string
+
+    Serializes the balancer's definition and state to a JSON-formatted string
+    that can be saved and later deserialized.
+
+    Parameters
+    ----------
+    obj : BWD, BWDRandom, MultiBWD, or Online
+        The balancer object to serialize
+
+    Returns
+    -------
+    str
+        JSON string representation of the object
+    """
     return json.dumps(
         {
             str(type(obj).__name__): {
@@ -37,6 +68,21 @@ def serialize(obj):
 
 
 def deserialize(str):
+    """Deserialize a balancer object from JSON string
+
+    Reconstructs a balancer object from its serialized JSON representation,
+    restoring both its definition and state.
+
+    Parameters
+    ----------
+    str : str
+        JSON string containing the serialized balancer
+
+    Returns
+    -------
+    BWD, BWDRandom, MultiBWD, or Online
+        The deserialized balancer object with restored state
+    """
     defs = json.loads(str)
     cls_name = list(defs.keys())[0]
     defs = defs[cls_name]
