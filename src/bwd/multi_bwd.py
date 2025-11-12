@@ -1,3 +1,5 @@
+"""Multi-treatment Balancing Walk Design implementation."""
+
 from collections.abc import Iterable
 from typing import Any
 

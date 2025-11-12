@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bwd"
-version = "0.1.7"
+version = "0.2.0"
 description = "A clean implementation of the Balancing Walk Design for online experimental design from Arbour, Dimmery, Mai and Rao (2022)"
 authors = ["Drew Dimmery <drew.dimmery@gmail.com>"]
 license = "Apache-2.0"
@@ -42,3 +42,19 @@ build-backend = "poetry.core.masonry.api"
 typeCheckingMode = "standard"
 reportConstantRedefinition = false
 reportUninitializedInstanceVariable = false
+
+[tool.pylint.main]
+disable = [
+    "useless-object-inheritance",
+    "too-many-instance-attributes",
+    "too-many-arguments",
+    "too-many-positional-arguments",
+    "too-many-locals",
+    "invalid-name",
+    "useless-import-alias",
+    "duplicate-code",
+    "attribute-defined-outside-init",
+]
+
+[tool.pylint.format]
+max-line-length = 120

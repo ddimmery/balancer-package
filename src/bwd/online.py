@@ -1,3 +1,5 @@
+"""Online balancer wrapper with automatic sample size expansion."""
+
 import numpy as np
 
 from .exceptions import SampleSizeExpendedError

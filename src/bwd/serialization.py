@@ -1,3 +1,5 @@
+"""Serialization utilities for BWD objects."""
+
 import json
 
 import numpy as np
@@ -67,7 +69,7 @@ def serialize(obj):
     )
 
 
-def deserialize(str):
+def deserialize(json_str):
     """Deserialize a balancer object from JSON string
 
     Reconstructs a balancer object from its serialized JSON representation,
@@ -75,7 +77,7 @@ def deserialize(str):
 
     Parameters
     ----------
-    str : str
+    json_str : str
         JSON string containing the serialized balancer
 
     Returns
@@ -83,10 +85,10 @@ def deserialize(str):
     BWD, BWDRandom, MultiBWD, or Online
         The deserialized balancer object with restored state
     """
-    defs = json.loads(str)
+    defs = json.loads(json_str)
     cls_name = list(defs.keys())[0]
     defs = defs[cls_name]
 
-    object = name2class[cls_name](**defs["definition"])
-    object.update_state(**defs["state"])
-    return object
+    bal_object = name2class[cls_name](**defs["definition"])
+    bal_object.update_state(**defs["state"])
+    return bal_object

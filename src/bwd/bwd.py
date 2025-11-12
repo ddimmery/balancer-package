@@ -1,3 +1,5 @@
+"""Balancing Walk Design with Restarts implementation."""
+
 import numpy as np
 
 from .exceptions import SampleSizeExpendedError

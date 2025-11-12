@@ -1,3 +1,5 @@
+"""Balancing Walk Design with reversion to Bernoulli randomization."""
+
 import numpy as np
 
 from .exceptions import SampleSizeExpendedError

@@ -1,8 +1,9 @@
 import numpy as np
 import pytest
-from bwd import BWD
-from bwd.serialization import serialize, deserialize
 from numpy.random import default_rng
+
+from bwd import BWD
+from bwd.serialization import deserialize, serialize
 
 rng = default_rng(84698384)  # ASCII for 'test' in decimal, concatenated
 
@@ -54,3 +55,42 @@ def test_assign_big():
 def test_assign_all():
     balancer = BWD(N=n, D=d)
     balancer.assign_all(test_X)
+
+
+def test_bwd_reduces_imbalance():
+    """Test that BWD achieves lower imbalance than pure randomization on average"""
+    n_test = 1000
+    d_test = 5
+    n_runs = 5
+
+    bwd_norms = []
+    rand_norms = []
+
+    for seed in range(n_runs):
+        rng_test = default_rng(10000 + seed)
+        X_test = rng_test.normal(size=(n_test, d_test))
+
+        # BWD assignments
+        balancer_test = BWD(N=n_test, D=d_test)
+        imbalance_bwd = np.zeros(d_test)
+
+        for x in X_test:
+            a = balancer_test.assign_next(x)
+            imbalance_bwd += (2 * a - 1) * x
+
+        # Pure randomization
+        A_rand = rng_test.binomial(n=1, p=0.5, size=n_test)
+        imbalance_rand = np.zeros(d_test)
+        for i, x in enumerate(X_test):
+            imbalance_rand += (2 * A_rand[i] - 1) * x
+
+        bwd_norms.append(np.linalg.norm(imbalance_bwd))
+        rand_norms.append(np.linalg.norm(imbalance_rand))
+
+    # BWD should have lower average imbalance
+    avg_bwd = np.mean(bwd_norms)
+    avg_rand = np.mean(rand_norms)
+
+    assert avg_bwd < avg_rand, (
+        f"BWD avg imbalance ({avg_bwd:.2f}) should be less than random ({avg_rand:.2f})"
+    )
