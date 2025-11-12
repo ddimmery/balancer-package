@@ -11,8 +11,6 @@ More details on the design of the method on the [About page](https://ddimmery.gi
 
 ## Installation
 
-(packages not yet available)
-
 With `pip`:
 
 ```
